@@ -46,19 +46,19 @@
     
     __weak __typeof(self) weakSelf = self;
     
-    [self.cell.mediaImageView setImageWithURL:imageURL
-                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                        
-                                        __typeof(self) strongSelf = weakSelf;
-                                        [strongSelf maskImageViewWithBubble];
-                                        [strongSelf removeActitityIndicator];
-                                    }];
+    [self.cell.mediaImageView sd_setImageWithURL:imageURL
+                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *url) {
+
+                                           __typeof(self) strongSelf = weakSelf;
+                                           [strongSelf maskImageViewWithBubble];
+                                           [strongSelf removeActitityIndicator];
+                                       }];
 }
 
 - (void) cellWillBeReused;
 {
     self.cell.mediaImageView.image = nil;
-    [self.cell.mediaImageView cancelCurrentImageLoad];
+    [self.cell.mediaImageView sd_cancelCurrentImageLoad];
     [self removeActitityIndicator];
 }
 
