@@ -90,6 +90,8 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     _springinessEnabled = NO;
     _springResistanceFactor = 1000;
     
+    _bubbleTopLabelInset = 60.0f;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(jsq_didReceiveApplicationMemoryWarningNotification:)
                                                  name:UIApplicationDidReceiveMemoryWarningNotification

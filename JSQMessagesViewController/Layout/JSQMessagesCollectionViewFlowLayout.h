@@ -102,6 +102,13 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault
 @property (assign, nonatomic) CGFloat messageBubbleLeftRightMargin;
 
 /**
+ *  The horizontal spacing used to lay out the top label within each `JSQMessagesCollectionViewCell`.
+ *
+ *  @discussion The default value is `60.0f`.
+ */
+@property (assign, nonatomic) CGFloat bubbleTopLabelInset;
+
+/**
  *  The inset of the frame of the text view within each `JSQMessagesCollectionViewCell`. 
  *  The inset values should be positive and are applied in the following ways:
  *  

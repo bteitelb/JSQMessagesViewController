@@ -432,13 +432,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         
         cell.textView.text = messageText;
         
-        CGFloat bubbleTopLabelInset = 60.0f;
-        
         if (isOutgoingMessage) {
-            cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, bubbleTopLabelInset);
+            cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, collectionView.collectionViewLayout.bubbleTopLabelInset);
         }
         else {
-            cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
+            cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, collectionView.collectionViewLayout.bubbleTopLabelInset, 0.0f, 0.0f);
         }
         
         cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
