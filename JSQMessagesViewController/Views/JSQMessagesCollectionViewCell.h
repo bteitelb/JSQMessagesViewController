@@ -54,7 +54,7 @@
  *
  *  @warning This class is intended to be subclassed. You should not use it directly.
  */
-@interface JSQMessagesCollectionViewCell : UICollectionViewCell
+@interface JSQMessagesCollectionViewCell : UICollectionViewCell <UIGestureRecognizerDelegate>
 
 /**
  *  The object that acts as the delegate for the cell.

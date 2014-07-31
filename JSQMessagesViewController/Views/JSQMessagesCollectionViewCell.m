@@ -106,8 +106,8 @@
     self.cellTopLabel.font = [UIFont boldSystemFontOfSize:12.0f];
     self.cellTopLabel.textColor = [UIColor lightGrayColor];
     
-    self.messageBubbleTopLabel.font = [UIFont systemFontOfSize:12.0f];
-    self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
+    self.messageBubbleTopLabel.font = [UIFont systemFontOfSize:11.0f];
+    self.messageBubbleTopLabel.textColor = [UIColor colorWithWhite:0.5 alpha:1];
     
     self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
@@ -126,20 +126,27 @@
     self.textView.contentOffset = CGPointZero;
     self.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
                                           NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
-    
+
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleLongPressGesture:)];
     longPress.minimumPressDuration = 0.4f;
+    longPress.delegate = self;
     [self addGestureRecognizer:longPress];
     self.longPressGestureRecognizer = longPress;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
+    tap.delegate = self;
     [self.avatarContainerView addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
-    
+
     UITapGestureRecognizer *tapMedia = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapMediaGesture:)];
     self.mediaImageView.userInteractionEnabled = YES;
     [self.mediaImageView addGestureRecognizer:tapMedia];
     self.tapMediaGestureRecognizer = tapMedia;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return ![touch.view isKindOfClass:[UIButton class]];
 }
 
 - (void)dealloc
