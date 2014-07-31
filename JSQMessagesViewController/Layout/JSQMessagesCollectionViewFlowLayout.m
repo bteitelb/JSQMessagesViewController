@@ -348,22 +348,25 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin;
     
-    CGFloat textInsetsTotal = [self jsq_messageBubbleTextContainerInsetsTotal];
-    
+    CGFloat horizontalInsets = self.messageBubbleTextViewTextContainerInsets.left + self.messageBubbleTextViewTextContainerInsets.right;
+
     CGSize finalSize;
 
     if (messageData.kind == JSQMessageTextKind)
     {
-        CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - textInsetsTotal, CGFLOAT_MAX)
+        CGRect stringRect = [[messageData text] boundingRectWithSize:CGSizeMake(maximumTextWidth - horizontalInsets, CGFLOAT_MAX)
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
                                                           attributes:@{ NSFontAttributeName : self.messageBubbleFont }
                                                              context:nil];
         
         CGSize stringSize = CGRectIntegral(stringRect).size;
         
+        // XXX: it seems boundingRectWithSize underestimates slightly?
+        stringSize.width += 4;
+        
         CGFloat verticalInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;
         
-        finalSize = CGSizeMake(stringSize.width, stringSize.height + verticalInsets);
+        finalSize = CGSizeMake(stringSize.width + horizontalInsets, stringSize.height + verticalInsets);
     }
     else if (messageData.kind == JSQMessageLocalMediaKind || messageData.kind == JSQMessageRemoteMediaKind)
     {
@@ -381,8 +384,8 @@ const CGFloat kJSQMessagesCollectionViewCellLabelHeightDefault = 20.0f;
     
     CGSize messageBubbleSize = [self messageBubbleSizeForItemAtIndexPath:indexPath];
     CGFloat remainingItemWidthForBubble = self.itemWidth - [self jsq_avatarSizeForIndexPath:indexPath].width;
-    CGFloat textPadding = [self jsq_messageBubbleTextContainerInsetsTotal];
-    CGFloat messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width - textPadding;
+    CGFloat horizontalInsets = self.messageBubbleTextViewTextContainerInsets.left + self.messageBubbleTextViewTextContainerInsets.right;
+    CGFloat messageBubblePadding = remainingItemWidthForBubble - messageBubbleSize.width - horizontalInsets;
     
     layoutAttributes.messageBubbleLeftRightMargin = messageBubblePadding;
     
