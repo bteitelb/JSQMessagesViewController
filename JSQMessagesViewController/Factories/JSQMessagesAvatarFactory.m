@@ -52,7 +52,7 @@
     
     CGRect frame = CGRectMake(0.0f, 0.0f, diameter, diameter);
     
-    NSString *text = userInitials;
+    NSString *text = [userInitials uppercaseString];
     
     NSDictionary *attributes = @{ NSFontAttributeName : font,
                                   NSForegroundColorAttributeName : textColor };
