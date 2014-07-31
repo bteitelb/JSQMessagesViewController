@@ -61,10 +61,11 @@
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
             {
                 [picker setSourceType:(UIImagePickerControllerSourceTypeCamera)];
-                [picker setCameraDevice:UIImagePickerControllerCameraDeviceFront];
             }
         }
         
+        picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+
         [self.presentingVC presentViewController:picker
                                         animated:YES
                                       completion:nil];
@@ -80,12 +81,8 @@
     
     [self.presentingVC dismissViewControllerAnimated:YES
                                           completion:^{
-                                              
-                                              UIImage *selectedImage = info[UIImagePickerControllerOriginalImage];
                                               __typeof(self) strongSelf = weakSelf;
-                                              
-
-                                              strongSelf.handler(selectedImage, nil);
+                                              strongSelf.handler(info, nil);
                                           }];
 }
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^JSQPickerHandler)(UIImage *image, NSError *error);
+typedef void(^JSQPickerHandler)(NSDictionary *info, NSError *error);
 
 @interface JSQImagePicker : NSObject
 
